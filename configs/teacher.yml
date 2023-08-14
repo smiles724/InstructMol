@@ -1,0 +1,45 @@
+train:
+  seed: 2023
+  result_dir: results/
+  epochs: 100   # pretraining epochs
+  batch: 1024
+  n_folds: 10   # default 5 folds
+  instruct_learning:
+    max_iters: 300_000
+    val_freq: 200
+    update_freq: 1_000
+    critic_iters: 300   # pretrain the critic
+    instruct_lr: 1.e-5    # not too large, otherwise loss explosion
+    critic_loss_weight: 10.0
+    labeled_weight: 0.0
+    unlabeled_weight: 0.1   # not too large, otherwise loss explosion
+    max_grad_norm: 100.0
+    soft_label: True
+    only_positive: True
+    classification: False
+    min_lr: 1.e-6
+    patience: 5
+
+data:
+  normalize: True   # scale the label between 0 and 1
+  unlabeled_path: ./250k_zinc
+  unlabeled_size: -1   # -1 means no limitation
+
+model:
+  aggr: transformer  # ['pool', 'transformer']
+  transformer_heads: 8
+  transformer_hidden: 128
+  node_in_feats: 37
+  dropout: 0.1    # small for ACE!!!!!!
+  num_layers: 3
+  n_fc_layers: 1
+  edge_hidden: 256
+  edge_in_feats: 6
+  fc_hidden: 512
+  node_hidden: 128
+  lr: 3.e-4
+
+teacher:
+  type: GIN
+  stage: supervised # ['supervised', 'semi-supervised']
+  path: results/GIN_CHEMBL214_Ki_best_0.pt
