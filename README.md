@@ -1,4 +1,4 @@
-# Instructor-inspired Machine Learning Enables Accurate Out-of-distribution and Activity Cliffs Molecular Property Prediction 🐉
+# Instructor-inspired Machine Learning Enables Accurate OOD and Activity Cliffs Molecular Property Prediction (NeurIPS 2024) 🐉
 ![repo version](https://img.shields.io/badge/Version-v.%201.0-green)
 ![python version](https://img.shields.io/badge/python-v.3.7-blue)
 ![license](https://img.shields.io/badge/license-MIT-orange)  
@@ -43,7 +43,7 @@ be reused to train other kinds of molecular models and obtain a more powerful re
 InstructMol currently supports Python 3.7. We rely on [PyTorch](https://pytorch.org/) (1.10.0) and 
 [PyTorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/) (2.2.0) to execute the code. 
 Notably, please do not install MoleculeACE by `pip install MoleculeACE`, because we make necessary modifications on its original implementation.
-Please follow the instruction below to install the necessary environment. 
+Please follow the instructions below to install the necessary environment. 
 
 ```markdown
 pip install torch    # we use torch 1.10.0 & cu113
@@ -61,9 +61,9 @@ problems: molecular property prediction and the activity cliff estimation.
 
 <h3 id="unlabeled-data">Unlabeled LabeledData</h3>
 
-Unlabeled data are collected from the common database [ZINC15](https://zinc15.docking.org/), a free database of commercially-available compounds for virtual screening.
+Unlabeled data are collected from the common database [ZINC15](https://zinc15.docking.org/), a free database of commercially available compounds for virtual screening.
 ZINC15 contains over 230 million purchasable compounds in ready-to-dock, 3D formats. You can use DeepChem to attain the unlabeled SMILES of molecules
-via this following script:
+via the following script:
 
 ```markdown
 https://github.com/deepchem/deepchem/blob/master/deepchem/molnet/load_function/zinc15_datasets.py
@@ -104,14 +104,14 @@ In order to realize the semi-supervised learning of our InstrutMol, please run t
 python main.py ./configs/ace.yml --model=MPNN --data=CHEMBL4203_Ki
 python main.py ./configs/molnet.yml --model=MPNN --data=bbbp
 ```
-where you can change the model type from `['GCN', 'GIN', 'GAT']`. You can also choose the dataset by altering `--data` arguement from 
+where you can change the model type from `['GCN', 'GIN', 'GAT']`. You can also choose the dataset by altering `--data` argument from 
 `['CHEMBL4203_Ki', 'CHEMBL2034_Ki', 'CHEMBL233_Ki', 'CHEMBL4616_EC50', 'CHEMBL287_Ki', 'CHEMBL218_EC50', 'CHEMBL264_Ki', 'CHEMBL219_Ki',
 'CHEMBL2835_Ki', 'CHEMBL2147_Ki', 'CHEMBL231_Ki', 'CHEMBL3979_EC50', 'CHEMBL237_EC50', 'CHEMBL244_Ki', 'CHEMBL4792_Ki', 'CHEMBL1871_Ki',
 'CHEMBL237_Ki', 'CHEMBL262_Ki', 'CHEMBL2047_EC50', 'CHEMBL239_EC50', 'CHEMBL2971_Ki', 'CHEMBL204_Ki', 'CHEMBL214_Ki', 'CHEMBL1862_Ki',
 'CHEMBL234_Ki', 'CHEMBL238_Ki', 'CHEMBL235_EC50', 'CHEMBL4005_Ki', 'CHEMBL236_Ki', 'CHEMBL228_Ki']`. You can control the number of 
 unlabeled data size via `--unlabeled_size` to use only a portion of all available unlabeled data.
-You can also add an extra commend `--debug` to only run one fold for debugging. Many other kinds of arguments are supported as well and please 
-check the code for details. Notably, in order to fast up the training speed for different tasks with the same unlabeled database, we save the processed unlabeled data file the 
+You can also add an extra command `--debug` to only run one fold for debugging. Many other kinds of arguments are supported as well, and please 
+check the code for details. Notably, in order to speed up the training for different tasks with the same unlabeled database, we save the processed unlabeled data file the 
 first time reading these unlabeled data points.
 
 <h3 id="teacher-model"> Train Molecular Models on a Hybrid Dataset</h3>
@@ -126,28 +126,30 @@ where you need to specify the type of the student model and the teacher model (*
 
 <h2 id="How-to-cite">How to cite</h2>
 
-If you find our helpful and interesting, please consider citing our paper. Thank you! 😜 
-Any kind of question is welcome, and you can directly pull an issue or send emails to [Fang WU](mailto:fw2359@columbia.edu). 
+If you find our paper helpful and interesting, please consider citing our paper. Thank you! :) 
+Any kind of question is welcome, and you can directly pull an issue or send emails to [Fang WU](mailto:fangwu97@stanford.edu). 
 We are pleased to see future works based on our InstructMol to push the frontier of molecular representation learning through semi-supervised learning. 
 
 ```markdown
-@article{wu2023instructbio,
-  title={InstructMol: A Large-scale Semi-supervised Learning Paradigm for Biochemical Problems},
-  author={Wu, Fang and Qin, Huiling and Gao, Wenhao and Li, Siyuan and Coley, Connor W and Li, Stan Z and Zhan, Xianyuan and Xu, Jinbo},
-  journal={arXiv preprint arXiv:2304.03906},
-  year={2023}
+@article{wu2024instructor,
+  title={Instructor-inspired machine learning for robust molecular property prediction},
+  author={Wu, Fang and Jin, Shuting and Li, Siyuan and Li, Stan Z},
+  journal={Advances in Neural Information Processing Systems},
+  volume={37},
+  pages={116202--116222},
+  year={2024}
 }
 ```
 
 <h2 id="Acknowledgement">Acknowledgement</h2>
 We would like to thank Dr. Wenhao Gao, Dr and Connor W. Coley from MIT for their valuable advice during the research period of InstructMol. 
-We would also want to express our gratitude for Dr. Siqi Sun from Fudan University, who also gave important help to our study, and MoleculeMind, for
+We would also want to express our gratitude to Dr. Siqi Sun from Fudan University, who also gave important help to our study, and MoleculeMind, for
 offering sufficient computational resources to support this project. 
 
 
 <h2 id="License">License</h2>
 
-InstructMol is under MIT license. For use of specific models, please refer to the model licenses found in the original packages.
+InstructMol is under MIT license. For the use of specific models, please refer to the model licenses found in the original packages.
 
 
 ## References
